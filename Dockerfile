@@ -4,13 +4,24 @@ FROM python:3.10-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy all contents into the working directory
-COPY . /app
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
+# Clone the ComfyUI repository
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git /app/ComfyUI
+
+# Set the working directory to ComfyUI
+WORKDIR /app/ComfyUI
+
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the default port for ComfyUI (e.g., 8188)
+# Clone the ComfyUI Manager into the custom_nodes directory
+RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/ComfyUI/custom_nodes/ComfyUI-Manager
+
+# Expose the default port for ComfyUI
 EXPOSE 8188
 
 # Command to launch ComfyUI
