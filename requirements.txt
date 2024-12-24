@@ -13,8 +13,15 @@ Pillow
 scipy
 tqdm
 psutil
-
-#non essential dependencies:
+# Non-essential dependencies:
 kornia>=0.7.1
 spandrel
 soundfile
+# Dependencies for ComfyUI Manager:
+GitPython
+PyGithub
+matrix-client==0.4.0
+huggingface-hub>0.20
+typer
+rich
+typing-extensions
