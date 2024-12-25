@@ -12,8 +12,9 @@ RUN apt-get update && \
 # Clone the ComfyUI repository
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git /app/ComfyUI
 
-# Set the working directory to ComfyUI
+# Fetch tags to ensure version information is available
 WORKDIR /app/ComfyUI
+RUN git fetch --tags
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
